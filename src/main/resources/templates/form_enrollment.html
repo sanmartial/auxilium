@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New User</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    input:invalid,
+    select:invalid {
+      border-color: red;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: -5px;
+      display: none;
+    }
+
+    input:invalid + .error,
+    select:invalid + .error {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<h1>Create New User</h1>
+<form action="/new" method="post">
+  <label for="userName">Username:</label>
+  <input type="text" id="userName" name="userName" required>
+  <span class="error" id="userNameError">Invalid username.</span>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+  <span class="error" id="passwordError">Invalid password.</span>
+
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" name="firstName" required>
+  <span class="error" id="firstNameError">Invalid first name.</span>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" name="lastName" required>
+  <span class="error" id="lastNameError">Invalid last name.</span>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+  <span class="error" id="emailError">Invalid email address.</span>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="text" id="phoneNumber" name="phoneNumber" required>
+  <span class="error" id="phoneNumberError">Invalid phone number.</span>
+
+  <label for="role">Role:</label>
+  <select id="role" name="role" required>
+    <option value="">Select role</option>
+    <option value="1">Admin</option>
+    <option value="2">User</option>
+  </select>
+
+  <input type="submit" value="Create User">
+</form>
+
+<script>
+  // Отображение сообщений об ошибках
+  document.getElementById('userName').addEventListener('input', function () {
+    document.getElementById('userNameError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+
+  document.getElementById('password').addEventListener('input', function () {
+    document.getElementById('passwordError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+
+  document.getElementById('firstName').addEventListener('input', function () {
+    document.getElementById('firstNameError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+
+  document.getElementById('lastName').addEventListener('input', function () {
+    document.getElementById('lastNameError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+
+  document.getElementById('email').addEventListener('input', function () {
+    document.getElementById('emailError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+
+  document.getElementById('phoneNumber').addEventListener('input', function () {
+    document.getElementById('phoneNumberError').style.display = this.validity.valid ? 'none' : 'block';
+  });
+</script>
+</body>
+</html>
