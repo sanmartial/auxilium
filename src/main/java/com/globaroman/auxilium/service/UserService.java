@@ -2,7 +2,6 @@ package com.globaroman.auxilium.service;
 
 import com.globaroman.auxilium.model.entity.RoleAUX;
 import com.globaroman.auxilium.model.entity.UserAUX;
-import com.globaroman.auxilium.model.repository.RoleRepository;
 import com.globaroman.auxilium.model.repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -14,20 +13,14 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final RoleService roleService;
-    @Autowired
-    public UserService(UserRepository userRepository, RoleRepository repository, RoleService roleService) {
-        this.userRepository = userRepository;
-        this.roleService = roleService;
 
+    @Autowired
+    public UserService(UserRepository userRepository ) {
+        this.userRepository = userRepository;
     }
 
-    public UserAUX createUser(UserAUX user, Long roleId) {
-
-        RoleAUX role = roleService.getRoleById(roleId);
-        role.addListRoles(user);
-        user.setRole(role);
-        return userRepository.save(user);
+    public UserAUX createUser(UserAUX user) {
+         return userRepository.save(user);
     }
 
     public List<UserAUX> getAllUsers() {
@@ -41,6 +34,5 @@ public class UserService {
     public UserAUX getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
-
 
 }

@@ -10,50 +10,36 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Table(name = "users")
+@Table(name = "users_aux")
 @Entity
 public class UserAUX {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Long id;
-    @Column(name = "username")
-    private String userName;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "firstname")
-    private String firstName;
-    @Column(name = "lastname")
-    private String lastName;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    private String username;
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
+    private String password;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String phonenumber;
+    @Enumerated(EnumType.STRING)
     private RoleAUX role;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    public UserAUX(String userName, String password, String firstName, String lastName, String email, String phoneNumber) {
-        this.userName = userName;
+    public UserAUX(String username, String password, String firstname, String lastname, String email, String phonenumber, RoleAUX role, Status status) {
+        this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "UserAUX{" + "id=" + id +
-                ", userName= '" + userName + '\'' +
-                ", password= '" + password + '\'' +
-                ", firstName= '" + firstName + '\'' +
-                ", lastName= ' " + lastName + '\'' +
-                ", email= '" + email + '\'' +
-                ", phoneNumber= '" + phoneNumber + '\'' +
-                ", role= " + role.getRoleName() +
-                '}';
+        this.phonenumber = phonenumber;
+        this.role = role;
+        this.status = status;
     }
 }
+
+
+

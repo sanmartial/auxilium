@@ -1,19 +1,20 @@
 package com.globaroman.auxilium.controller;
 
+import com.globaroman.auxilium.config.PasswordEncoderConfig;
 import com.globaroman.auxilium.model.entity.RoleAUX;
+import com.globaroman.auxilium.model.entity.Status;
 import com.globaroman.auxilium.model.entity.UserAUX;
-import com.globaroman.auxilium.service.RoleService;
 import com.globaroman.auxilium.service.UserService;
 import com.globaroman.auxilium.view.TextConstants;
 import com.globaroman.auxilium.view.ViewAUX;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 //@RestController
 @Controller
@@ -21,22 +22,37 @@ import java.util.ResourceBundle;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoderConfig passwordEncoderConfig;
 
-    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserService userService, PasswordEncoderConfig passwordEncoderConfig) {
         this.userService = userService;
-        this.roleService = roleService;
+
+        this.passwordEncoderConfig = passwordEncoderConfig;
     }
 
-    @GetMapping("/")
-    public String getMainPage() {
-        return "main_page";
+    @GetMapping("/main")
+    public String getMainPage(Authentication authentication) {
+        String userName = authentication.getName();
+
+        if (authentication == null || !authentication.isAuthenticated() || userName.equals("admin") ) {
+            return "main_page";
+        } else {
+            return "form_sussesfull";
+        }
     }
+
+
     @GetMapping("/new")
-    public String getPage() {
-        return "form_enrollment";
+    public String getPage(Authentication authentication)
+    {
+        String userName = authentication.getName();
+        if (authentication == null || !authentication.isAuthenticated() || userName.equals("admin")) {
+        return "form_enrollment";}
+        else {
+            return "form_sussesfull";
+        }
     }
     @PostMapping("/new")
     public String createNewUser(@RequestParam(value = "userName") String userName,
@@ -45,8 +61,7 @@ public class UserController {
                                 @RequestParam(value = "lastName") String lastName,
                                 @RequestParam(value = "email") String email,
                                 @RequestParam(value = "phoneNumber") String phoneNumber,
-                                @RequestParam(value = "role") Long roleId, Model model) {
-
+                                @RequestParam(value = "role") String role, Model model) {
 
         if (checkDataFromForm(userName, ViewAUX.bundleRegEX.getString(TextConstants.REGEX_USERNAME)) ||
                 checkDataFromForm(password, ViewAUX.bundleRegEX.getString(TextConstants.REGEX_PASSWORD)) ||
@@ -61,14 +76,16 @@ public class UserController {
 
         if (checkUsernameDataBase(userName)) {
             UserAUX user = UserAUX.builder()
-                    .userName(userName)
-                    .password(password)
-                    .firstName(firstName)
-                    .lastName(lastName)
+                    .username(userName)
+                    .password(passwordEncoderConfig.passwordEncoder().encode(password))
+                    .firstname(firstName)
+                    .lastname(lastName)
                     .email(email)
-                    .phoneNumber(phoneNumber)
+                    .phonenumber(phoneNumber)
+                    .role(RoleAUX.valueOf(role))
+                    .status(Status.ACTIVE)
                     .build();
-            userService.createUser(user, roleId);
+            userService.createUser(user);
             return "form_sussesfull";
         } else {
             model.addAttribute("usernameExists", true);

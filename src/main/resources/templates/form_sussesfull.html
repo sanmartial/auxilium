@@ -5,6 +5,19 @@
     <title>NEW USER ADDED</title>
 </head>
 <body>
-<h3>NEW USER ADDED SUCCESSFULLY</h3>
+<h3>ALL WENT SUCCESSFULLY</h3>
+
+<button onclick="logout()">Logout</button>
+<button onclick="main()">Main page</button>
+
+<script>
+    function logout() {
+        window.location.href = "/auth/login";
+    }
+
+    function main() {
+        window.location.href = "/main";
+    }
+</script>
 </body>
 </html>
