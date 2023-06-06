@@ -55,39 +55,43 @@
     select:invalid + .error {
       display: block;
     }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 <h1>Create New User</h1>
+<div class="error-message" th:if="${error}" th:text="${error}"></div>
 <form action="/new" method="post">
   <label for="userName">Username:</label>
   <input type="text" id="userName" name="userName" required>
-  <span class="error" id="userNameError">Invalid username.</span>
 
   <label for="password">Password:</label>
   <input type="password" id="password" name="password" required>
-  <span class="error" id="passwordError">Invalid password.</span>
 
   <label for="firstName">First Name:</label>
   <input type="text" id="firstName" name="firstName" required>
-  <span class="error" id="firstNameError">Invalid first name.</span>
 
   <label for="lastName">Last Name:</label>
   <input type="text" id="lastName" name="lastName" required>
-  <span class="error" id="lastNameError">Invalid last name.</span>
+
+  <label for="birthdate">Date of Birth:</label>
+  <input type="date" id="birthdate" name="birthdate" required>
 
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required>
-  <span class="error" id="emailError">Invalid email address.</span>
 
   <label for="phoneNumber">Phone Number:</label>
   <input type="text" id="phoneNumber" name="phoneNumber" required>
-  <span class="error" id="phoneNumberError">Invalid phone number.</span>
 
   <label for="role">Role:</label>
   <select id="role" name="role" required>
     <option value="">Select role</option>
-    <option value="ADMIN">Admin</option>
     <option value="PATIENT">Patient</option>
     <option value="DOCTOR">Doctor</option>
   </select>
@@ -98,28 +102,36 @@
 <script>
   // Отображение сообщений об ошибках
   document.getElementById('userName').addEventListener('input', function () {
-    document.getElementById('userNameError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('userName').classList.remove('error');
+    document.getElementById('userNameError').style.display = this.value ? 'none' : 'block';
   });
 
   document.getElementById('password').addEventListener('input', function () {
-    document.getElementById('passwordError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('password').classList.remove('error');
+    document.getElementById('passwordError').style.display = this.value ? 'none' : 'block';
   });
 
   document.getElementById('firstName').addEventListener('input', function () {
-    document.getElementById('firstNameError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('firstName').classList.remove('error');
+    document.getElementById('firstNameError').style.display = this.value ? 'none' : 'block';
   });
 
   document.getElementById('lastName').addEventListener('input', function () {
-    document.getElementById('lastNameError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('lastName').classList.remove('error');
+    document.getElementById('lastNameError').style.display = this.value ? 'none' : 'block';
   });
 
   document.getElementById('email').addEventListener('input', function () {
-    document.getElementById('emailError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('email').classList.remove('error');
+    document.getElementById('emailError').style.display = this.value ? 'none' : 'block';
   });
 
   document.getElementById('phoneNumber').addEventListener('input', function () {
-    document.getElementById('phoneNumberError').style.display = this.validity.valid ? 'none' : 'block';
+    document.getElementById('phoneNumber').classList.remove('error');
+    document.getElementById('phoneNumberError').style.display = this.value ? 'none' : 'block';
   });
 </script>
 </body>
 </html>
+
+

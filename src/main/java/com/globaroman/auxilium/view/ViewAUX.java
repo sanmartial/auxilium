@@ -19,8 +19,8 @@ public class ViewAUX implements TextConstants {
         System.out.println(message);
     }
 
-    public static void printStringBundle(String message) {
-        printMessage(bundle.getString(message));
+    public static String printStringBundle(String message) {
+        return bundle.getString(message);
     }
 
     public static String concatenationString(String... message) {
@@ -31,10 +31,10 @@ public class ViewAUX implements TextConstants {
         return new String(concatString);
     }
 
-    public static void printWrongStringInput(String message) {
-        printMessage(concatenationString(
+    public static String printWrongStringInput(String message) {
+        return concatenationString(
                 bundle.getString(MESSAGE_WRONG_INPUT_DATA),
                 bundle.getString(MESSAGE_INPUT_STRING_DATA),
-                bundle.getString(message)));
+                bundle.getString(message));
     }
 }

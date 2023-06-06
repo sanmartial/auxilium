@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +18,18 @@ import lombok.*;
 public class UserAUX {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @JsonIgnore
+    private String user_id;
     private String username;
     @JsonIgnore
     private String password;
     private String firstname;
     private String lastname;
+    private LocalDate date_birth;
+    @JsonIgnore
+    private LocalDateTime date_logged;
     private String email;
     private String phonenumber;
     @Enumerated(EnumType.STRING)

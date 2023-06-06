@@ -1,6 +1,7 @@
 package com.globaroman.auxilium.model.entity;
 
 public enum PermissionA {
+    USER_CREATE("user:create"),
     USER_READ("user:read"),
     USER_WRITE("user:write"),
     USER_UPDATE("user:update");

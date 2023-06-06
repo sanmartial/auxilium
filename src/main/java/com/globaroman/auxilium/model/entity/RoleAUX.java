@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public enum RoleAUX implements GrantedAuthority {
     PATIENT(Set.of(PermissionA.USER_READ)),
     DOCTOR(Set.of(PermissionA.USER_READ, PermissionA.USER_WRITE)),
-    ADMIN(Set.of(PermissionA.USER_READ, PermissionA.USER_WRITE));
+    ADMIN(Set.of(PermissionA.USER_CREATE, PermissionA.USER_READ, PermissionA.USER_WRITE, PermissionA.USER_UPDATE));
     private final Set<PermissionA> permission;
 
     RoleAUX(Set<PermissionA> permission) {

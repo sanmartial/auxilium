@@ -35,4 +35,7 @@ public class UserService {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
+    public List<UserAUX> getAllUsersByPatient() {
+        return userRepository.findAllPatients();
+    }
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnosis List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .diagnosis {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .diagnosis-info {
+      flex: 1;
+    }
+
+    .diagnosis-actions {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .diagnosis-actions form {
+      margin-right: 10px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>Diagnosis</h1>
+  <div class="diagnosis-actions">
+    <form th:action="@{/cabinet/newDiagnosis}" method="get">
+      <button type="submit">Create New Diagnosis</button>
+    </form>
+    <form th:action="@{/cabinet/diagnosis/edit/{id}(id=${diagnosis.id})}" method="get">
+      <button type="submit">Edit</button>
+    </form>
+    <form th:action="@{/cabinet/diagnosis/{id}(id=${diagnosis.id})}" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div th:each="diagnosis : ${diagnosis}" class="diagnosis">
+  <div class="diagnosis-info">
+    <h2 th:text="${diagnosis.getDiagnosis_name()}"></h2>
+    <p th:text="${diagnosis.date}"></p>
+    <p th:text="${diagnosis.description}"></p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
