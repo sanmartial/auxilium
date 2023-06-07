@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<h1>Create Analysis</h1>
+<form action="/cabinet/newAnalyzes" method="post">
+  <label for="analysisDate">Analysis Date:</label>
+  <input type="date" id="analysisDate" name="analysisDate" required>
+
+  <label for="analysisType">Analysis Type:</label>
+  <input type="text" id="analysisType" name="analysisType" required>
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" required></textarea>
+
+  <label for="analysisResult">Analysis Result:</label>
+  <textarea id="analysisResult" name="analysisResult" required></textarea>
+
+  <label for="pathFile">Path to file (scan or media):</label>
+  <input type="text" id="pathFile" name="pathFile" required>
+
+  <input type="hidden" id="diagnosis_id" name="diagnosis_id" th:value="${diagnosis_id}">
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

@@ -114,25 +114,7 @@ public class EnrollController {
     }
 
 
-    @GetMapping("/cabinet")
-    public String getPageCabinet(Model model, Authentication authentication) {
 
-        String username = authentication.getName();
-        UserAUX userAUX = userService.getUserByUsername(username);
-
-        if ("DOCTOR".equals(userAUX.getRole().getAuthority())) {
-            model.addAttribute("username", username);
-            return "cabinet_doctor";
-        } if (userAUX.getRole().getAuthority().equals("PATIENT") ) {
-            model.addAttribute("username", username);
-            return "cabinet_patient";
-        }
-        if (userAUX.getRole().getAuthority().equals("ADMIN") ) {
-            model.addAttribute("username", username);
-            return "cabinet_admin";
-        }
-
-        return "main_page"; }
 
     private boolean checkDataFromForm(String line, String regex) {
         System.out.println(line);

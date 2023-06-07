@@ -52,6 +52,21 @@
         .add-diagnosis-button:hover {
             background-color: #45a049;
         }
+
+        .cabinet-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #3f51b5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .cabinet-button:hover {
+            background-color: #303f9f;
+        }
     </style>
 </head>
 <body>
@@ -64,17 +79,17 @@
     </ul>
 </div>
 
-
 <a href="/cabinet/newDiagnosis" class="add-diagnosis-button">Add Diagnosis</a>
+
+<a href="/cabinet" class="cabinet-button">Кабинет</a>
 
 <script>
     function viewDiagnosis(diagnosisId) {
-        // Handle the click event to view diagnosis details
-        // Redirect to the diagnosis page with the specified ID
-        window.location.href = '/cabinet/diagnosis/' + diagnosisId;
+         window.location.href = '/cabinet/diagnosis/' + diagnosisId;
     }
 </script>
 
 </body>
 </html>
+
 

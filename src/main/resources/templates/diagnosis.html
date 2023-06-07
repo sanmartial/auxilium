@@ -67,7 +67,12 @@
     <h2 th:text="${diagnosis.getDiagnosis_name()}"></h2>
     <p th:text="${diagnosis.date}"></p>
     <p th:text="${diagnosis.description}"></p>
+
+    <form th:action="@{/cabinet/newAnalyzes/{id}(id=${diagnosis.id})}" method="get">
+      <button type="submit">Добавить анализы</button>
+    </form>
   </div>
+
 </div>
 
 </body>

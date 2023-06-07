@@ -24,6 +24,7 @@ public class Analyzes {
     @JsonIgnore
     private Long diagnosis_id;
     private String type_analyzes;
+    private String description_analyzes;
     private String result_analyze;
     private LocalDate date_analyze;
     private String pathScan;
