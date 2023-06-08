@@ -1,5 +1,6 @@
-package com.globaroman.auxilium.model.entity;
+package com.globaroman.auxilium.model.entity.security;
 
+import com.globaroman.auxilium.model.entity.UserAUX;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

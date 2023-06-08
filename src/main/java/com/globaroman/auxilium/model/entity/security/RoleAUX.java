@@ -1,4 +1,4 @@
-package com.globaroman.auxilium.model.entity;
+package com.globaroman.auxilium.model.entity.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

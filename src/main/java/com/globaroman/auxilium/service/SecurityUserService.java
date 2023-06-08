@@ -1,6 +1,6 @@
 package com.globaroman.auxilium.service;
 
-import com.globaroman.auxilium.model.entity.SecurityUser;
+import com.globaroman.auxilium.model.entity.security.SecurityUser;
 import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.model.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;

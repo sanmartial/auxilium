@@ -1,4 +1,4 @@
-package com.globaroman.auxilium.model.entity;
+package com.globaroman.auxilium.model.entity.cabinet;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "medicament")
+@Table(name = "medical_certificate")
 @Entity
-public class Medicament {
+public class MedicalCertificate {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,7 @@ public class Medicament {
     private String patient_id;
     @JsonIgnore
     private Long diagnosis_id;
-    private String drug_name;
-    private String dosage;
-    private LocalDate start_date;
-
-
-
+    private String description;
+    private LocalDate dateIssue;
+    private String pathScan;
 }

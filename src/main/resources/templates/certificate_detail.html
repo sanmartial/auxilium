@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Analyzes Details</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      width: 120px; /* Добавлено для установки фиксированной ширины заголовка */
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      display: flex;
+    }
+
+    .actions form {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>Medical certificate Details</h1>
+  <div class="actions">
+
+    <form th:action="@{/cabinet/analyzes/edit/{id}(id=${certificate.id})}" method="get">
+      <button type="submit">Edit</button>
+    </form>
+    <form th:action="@{/cabinet/analyzes/{id}(id=${certificate.id})}" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <td th:text="${certificate.dateIssue}"></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td th:text="${certificate.description}"></td>
+  </tr>
+    <tr>
+    <th>Path Scan</th>
+    <td th:text="${certificate.pathScan}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

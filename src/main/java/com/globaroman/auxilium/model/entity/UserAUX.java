@@ -1,6 +1,8 @@
 package com.globaroman.auxilium.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.globaroman.auxilium.model.entity.security.RoleAUX;
+import com.globaroman.auxilium.model.entity.security.Status;
 import jakarta.persistence.*;
 import lombok.*;
 

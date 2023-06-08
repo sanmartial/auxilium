@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Diagnosis Form</title>
+  <title>Create Medical certificate</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,6 +43,10 @@
       height: 100px;
     }
 
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
     input[type="submit"] {
       background-color: #4CAF50;
       color: #fff;
@@ -55,14 +59,18 @@
   </style>
 </head>
 <body>
-<h1>Diagnosis Form</h1>
-<form action="/cabinet/newDiagnosis" method="post">
-  <label for="diseaseName">Disease Name:</label>
-  <input type="text" id="diseaseName" name="diseaseName" required>
+<h1>Create medical certificate</h1>
+<form action="/cabinet/diagnosis/newCertificate" method="post">
+  <label for="dateIssue">Certificate issue date:</label>
+  <input type="date" id="dateIssue" name="dateIssue" required>
 
-  <label for="symptoms">Symptoms Description:</label>
-  <textarea id="symptoms" name="symptoms" required></textarea>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" required></textarea>
 
+  <label for="pathFile">Path to file (scan or media):</label>
+  <input type="text" id="pathFile" name="pathFile" required>
+
+  <input type="hidden" id="diagnosis_id" name="diagnosis_id" th:value="${diagnosis_id}">
   <input type="submit" value="Submit">
 </form>
 </body>

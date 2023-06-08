@@ -1,6 +1,6 @@
 package com.globaroman.auxilium.model.repository;
 
-import com.globaroman.auxilium.model.entity.Diagnosis;
+import com.globaroman.auxilium.model.entity.cabinet.Diagnosis;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;

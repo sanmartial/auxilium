@@ -1,17 +1,14 @@
 package com.globaroman.auxilium.service;
 
 import com.globaroman.auxilium.IntegrationTestBase;
-import com.globaroman.auxilium.model.entity.RoleAUX;
-import com.globaroman.auxilium.model.entity.Status;
+import com.globaroman.auxilium.model.entity.security.RoleAUX;
+import com.globaroman.auxilium.model.entity.security.Status;
 import com.globaroman.auxilium.model.entity.UserAUX;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,8 +52,8 @@ class UserServiceTest extends IntegrationTestBase {
 
     @Test
     void testGetUserByUsernameShouldThrowNull() {
-        String username = "username";
-        assertThrows(NullPointerException.class, () -> userService.getUserByUsername(username));
+        String username = "username234";
+        assertThrows(EntityNotFoundException.class, () -> userService.getUserByUsername(username));
 
 
     }

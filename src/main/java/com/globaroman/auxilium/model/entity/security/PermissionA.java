@@ -1,4 +1,4 @@
-package com.globaroman.auxilium.model.entity;
+package com.globaroman.auxilium.model.entity.security;
 
 public enum PermissionA {
     USER_CREATE("user:create"),

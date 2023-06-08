@@ -1,8 +1,8 @@
 package com.globaroman.auxilium.controller;
 
 import com.globaroman.auxilium.config.PasswordEncoderConfig;
-import com.globaroman.auxilium.model.entity.RoleAUX;
-import com.globaroman.auxilium.model.entity.Status;
+import com.globaroman.auxilium.model.entity.security.RoleAUX;
+import com.globaroman.auxilium.model.entity.security.Status;
 import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.service.UserService;
 import com.globaroman.auxilium.view.TextConstants;
@@ -27,10 +27,8 @@ import static com.globaroman.auxilium.view.TextConstants.MESSAGE_WRONG_INPUT_DAT
 @Controller
 @RequestMapping("/")
 public class EnrollController {
-
     private final UserService userService;
     private final PasswordEncoderConfig passwordEncoderConfig;
-
 
     @Autowired
     public EnrollController(UserService userService, PasswordEncoderConfig passwordEncoderConfig) {
@@ -53,7 +51,6 @@ public class EnrollController {
             return "main_page";
         }
     }
-
 
     @GetMapping("/new")
     public String getPage(Authentication authentication)
@@ -78,7 +75,6 @@ public class EnrollController {
                                 @RequestParam(value = "email") String email,
                                 @RequestParam(value = "phoneNumber") String phoneNumber,
                                 @RequestParam(value = "role") String role, Model model) {
-
         if (checkDataFromForm(userName, ViewAUX.bundleRegEX.getString(TextConstants.REGEX_USERNAME)) ||
                 checkDataFromForm(password, ViewAUX.bundleRegEX.getString(TextConstants.REGEX_PASSWORD)) ||
                 checkDataFromForm(firstName, ViewAUX.bundleRegEX.getString(TextConstants.REGEX_NAME)) ||
@@ -109,13 +105,8 @@ public class EnrollController {
         } else {
             model.addAttribute("error", "Username already exists.");
             return "form_enrollment";
-
         }
     }
-
-
-
-
     private boolean checkDataFromForm(String line, String regex) {
         System.out.println(line);
         System.out.println(regex);
@@ -123,13 +114,11 @@ public class EnrollController {
     }
 
     private boolean checkUsernameDataBase(String userName) {
-        System.out.println(userName);
-        try {
+          try {
             userService.getUserByUsername(userName);
             return false;
         } catch (EntityNotFoundException e) {
             return true;
         }
-
     }
 }

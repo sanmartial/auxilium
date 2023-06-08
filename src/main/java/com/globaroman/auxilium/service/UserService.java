@@ -1,6 +1,5 @@
 package com.globaroman.auxilium.service;
 
-import com.globaroman.auxilium.model.entity.RoleAUX;
 import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.model.repository.UserRepository;
 

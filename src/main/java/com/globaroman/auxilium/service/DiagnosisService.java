@@ -1,6 +1,6 @@
 package com.globaroman.auxilium.service;
 
-import com.globaroman.auxilium.model.entity.Diagnosis;
+import com.globaroman.auxilium.model.entity.cabinet.Diagnosis;
 import com.globaroman.auxilium.model.repository.DiagnosisRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

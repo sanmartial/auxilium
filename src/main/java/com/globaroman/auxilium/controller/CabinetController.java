@@ -1,11 +1,13 @@
 package com.globaroman.auxilium.controller;
 
-import com.globaroman.auxilium.model.entity.Analyzes;
-import com.globaroman.auxilium.model.entity.Diagnosis;
+import com.globaroman.auxilium.model.entity.cabinet.Analyzes;
+import com.globaroman.auxilium.model.entity.cabinet.Diagnosis;
 import com.globaroman.auxilium.model.entity.UserAUX;
+import com.globaroman.auxilium.model.entity.cabinet.MedicalCertificate;
 import com.globaroman.auxilium.model.repository.DiagnosisRepository;
 import com.globaroman.auxilium.service.AnalyzesService;
 import com.globaroman.auxilium.service.DiagnosisService;
+import com.globaroman.auxilium.service.MedicalCertificateService;
 import com.globaroman.auxilium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,13 +24,14 @@ public class CabinetController {
     private final UserService userService;
     private final DiagnosisService diagnosisService;
     private final AnalyzesService analyzesService;
-
+    private final MedicalCertificateService certificateService;
     @Autowired
     public CabinetController(UserService userService, DiagnosisService diagnosisService,
-                             DiagnosisRepository diagnosisRepository, AnalyzesService analyzesService) {
+                             DiagnosisRepository diagnosisRepository, AnalyzesService analyzesService, MedicalCertificateService certificateService) {
         this.userService = userService;
         this.diagnosisService = diagnosisService;
         this.analyzesService = analyzesService;
+        this.certificateService = certificateService;
     }
 
     @GetMapping()
@@ -49,7 +51,6 @@ public class CabinetController {
             model.addAttribute("username", username);
             return "cabinet_admin";
         }
-
         return "main_page"; }
     @GetMapping("/newDiagnosis")
     public String getPageDiagnosis() {
@@ -66,7 +67,6 @@ public class CabinetController {
                 .date(LocalDate.now())
                 .patient_id(user_id)
                 .build());
-
         return "redirect:/cabinet/historyDiagnosis";
     }
 
@@ -82,15 +82,17 @@ public class CabinetController {
     public String getPageDiagnosis(@PathVariable("id") Long id, Model model) {
         Diagnosis diagnosis = diagnosisService.getDiagnosisById(id);
         List<Analyzes> analyzesList = analyzesService.getAllAnalyseById(diagnosis.getId());
+        List<MedicalCertificate> certificateList = certificateService.getAllCertificateByDIagnosisId(id);
         model.addAttribute("diagnosis", diagnosis);
         model.addAttribute("analyzesList", analyzesList);
+        model.addAttribute("certificateList", certificateList);
         return "diagnosis";
     }
 
     @PostMapping("/diagnosis/{id}")
     public ResponseEntity<String> deleteDiagnosis(@PathVariable("id") Long id) {
         String result = diagnosisService.deleteDiagnosis(id);
-        return ResponseEntity.ok(result);
+       return ResponseEntity.ok(result);
     }
 
     @GetMapping("/diagnosis/edit/{id}")
@@ -103,43 +105,13 @@ public class CabinetController {
     @PostMapping("/diagnosis/edit/{id}")
     public String updateDiagnosis(@RequestParam(value = "diseaseName") String diseaseName,
                                   @RequestParam(value = "symptoms") String symptoms,
-                                  @PathVariable("id") Long id, Authentication authentication) {
+                                  @PathVariable("id") Long id) {
         Diagnosis diagnosis = diagnosisService.getDiagnosisById(id);
         diagnosis.setDiagnosis_name(diseaseName);
         diagnosis.setDescription(symptoms);
         diagnosisService.updateDiagnosis(diagnosis);
-
         return "redirect:/cabinet/historyDiagnosis";
     }
-
-    @GetMapping("/newAnalyzes/{id}")
-    public String getPageAnalyzes(@PathVariable Long id, Model model) {
-        model.addAttribute("diagnosis_id", id);
-        return "analyzes_form";}
-
-    @PostMapping("/newAnalyzes")
-    public String createNewAnalizes(@RequestParam(value = "analysisDate") LocalDate date_analyze,
-                                    @RequestParam(value = "analysisType") String type_analyzes,
-                                    @RequestParam(value = "description") String description,
-                                    @RequestParam(value = "analysisResult") String analysisResult,
-                                    @RequestParam(value = "pathFile") String pathFile,
-                                    @RequestParam("diagnosis_id") Long diagnosis_id,
-                                    Authentication authentication) {
-        System.out.println("Создаю новый анализ");
-        String user_id = getUserID(authentication);
-        Analyzes analyzes = new Analyzes()
-                .builder()
-                .diagnosis_id(diagnosis_id)
-                .date_analyze(date_analyze)
-                .description_analyzes(description)
-                .type_analyzes(type_analyzes)
-                .result_analyze(analysisResult)
-                .patient_id(user_id)
-                .pathScan(pathFile)
-                .build();
-        analyzesService.createAnalyzes(analyzes);
-        System.out.println("Создал новый анализ");
-        return "redirect:/cabinet/diagnosis/" + diagnosis_id;}
 
     private String getUserID(Authentication authentication) {
         String username = authentication.getName();

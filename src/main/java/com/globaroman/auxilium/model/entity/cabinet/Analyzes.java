@@ -1,4 +1,4 @@
-package com.globaroman.auxilium.model.entity;
+package com.globaroman.auxilium.model.entity.cabinet;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

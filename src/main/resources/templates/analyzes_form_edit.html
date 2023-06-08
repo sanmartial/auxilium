@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Diagnosis Form</title>
+  <title>Create Analysis</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,6 +43,10 @@
       height: 100px;
     }
 
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
     input[type="submit"] {
       background-color: #4CAF50;
       color: #fff;
@@ -55,13 +59,23 @@
   </style>
 </head>
 <body>
-<h1>Diagnosis Form</h1>
-<form action="/cabinet/newDiagnosis" method="post">
-  <label for="diseaseName">Disease Name:</label>
-  <input type="text" id="diseaseName" name="diseaseName" required>
+<h1>Create Analysis</h1>
+<form th:action="@{/cabinet/analyzes/edit/{id}(id=${analyzes.id})}" method="post">
 
-  <label for="symptoms">Symptoms Description:</label>
-  <textarea id="symptoms" name="symptoms" required></textarea>
+  <label for="analysisDate">Analysis Date:</label>
+  <input type="date" id="analysisDate" name="analysisDate" required th:value="${analyzes.date_analyze}">
+
+  <label for="analysisType">Analysis Type:</label>
+  <input type="text" id="analysisType" name="analysisType" required th:value="${analyzes.type_analyzes}">
+
+  <label for="description">Description:</label>
+  <input type="text" id="description" name="description" required th:value="${analyzes.description_analyzes}">
+
+  <label for="analysisResult">Analysis Result:</label>
+  <input type="text" id="analysisResult" name="analysisResult" required th:value="${analyzes.result_analyze}">
+
+  <label for="pathFile">Path to file (scan or media):</label>
+  <input type="text" id="pathFile" name="pathFile" required th:value="${analyzes.pathScan}">
 
   <input type="submit" value="Submit">
 </form>
