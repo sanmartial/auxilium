@@ -3,19 +3,15 @@ package com.globaroman.auxilium.service;
 import com.globaroman.auxilium.model.entity.cabinet.Analyzes;
 import com.globaroman.auxilium.model.repository.AnalyzesRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AnalyzesService {
     private final AnalyzesRepository analyzesRepository;
-
-    @Autowired
-    public AnalyzesService(AnalyzesRepository analyzesRepository) {
-        this.analyzesRepository = analyzesRepository;
-    }
 
     public Analyzes createAnalyzes(Analyzes analyzes) {
         return analyzesRepository.save(analyzes);
@@ -44,4 +40,7 @@ public class AnalyzesService {
     }
 
 
+    public List<Analyzes> getAllAnalyzes() {
+        return analyzesRepository.findAll();
+    }
 }

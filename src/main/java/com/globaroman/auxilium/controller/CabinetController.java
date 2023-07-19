@@ -9,6 +9,7 @@ import com.globaroman.auxilium.service.AnalyzesService;
 import com.globaroman.auxilium.service.DiagnosisService;
 import com.globaroman.auxilium.service.MedicalCertificateService;
 import com.globaroman.auxilium.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,21 +20,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/cabinet")
 public class CabinetController {
     private final UserService userService;
     private final DiagnosisService diagnosisService;
     private final AnalyzesService analyzesService;
     private final MedicalCertificateService certificateService;
-    @Autowired
-    public CabinetController(UserService userService, DiagnosisService diagnosisService,
-                             DiagnosisRepository diagnosisRepository, AnalyzesService analyzesService, MedicalCertificateService certificateService) {
-        this.userService = userService;
-        this.diagnosisService = diagnosisService;
-        this.analyzesService = analyzesService;
-        this.certificateService = certificateService;
-    }
-
     @GetMapping()
     public String getPageCabinet(Model model, Authentication authentication) {
 

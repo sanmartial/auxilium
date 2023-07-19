@@ -4,6 +4,7 @@ import com.globaroman.auxilium.model.entity.security.SecurityUser;
 import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.model.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,13 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service("SecurityUserService")
+@RequiredArgsConstructor
 public class SecurityUserService implements UserDetailsService {
     private final UserRepository userRepository;
-
-    @Autowired
-    public SecurityUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

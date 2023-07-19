@@ -4,6 +4,7 @@ import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.model.entity.cabinet.MedicalCertificate;
 import com.globaroman.auxilium.service.MedicalCertificateService;
 import com.globaroman.auxilium.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,18 +17,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/cabinet/diagnosis")
 public class MedicateCertController {
     String path = "C:\\Users\\globa\\OneDrive\\Изображения\\AUXStorage\\CCF18102022_0008.pdf";
     private final MedicalCertificateService certificateService;
     private final UserService userService;
-    @Autowired
-    public MedicateCertController(MedicalCertificateService certificateService, UserService userService) {
-        this.certificateService = certificateService;
-        this.userService = userService;
-    }
 
-    //
     @GetMapping("/newCertificate/{id}")
     public String getPageCertificate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("diagnosis_id", id);

@@ -9,13 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class PasswordEncoderConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();    }
-    //Метод passwordEncoder() возвращает экземпляр BCryptPasswordEncoder, который является реализацией PasswordEncoder.
-    // PasswordEncoder это интерфейс в Spring Security, который используется для кодирования паролей.
-    //Аннотация @Bean указывает, что метод должен быть вызван для создания объекта, который будет управляться Spring Container.
-    //BCryptPasswordEncoder - это реализация, которая использует шифрование BCrypt.
-    // BCrypt является сильной функцией хеширования, которая основана на Blowfish.
-    // Одной из особенностей BCrypt является то, что он автоматически генерирует "соль" (случайный набор байтов, добавленный к паролю перед хешированием),
-    // что делает его очень безопасным для хранения паролей.
-    //В общем, этот метод предоставляет механизм для безопасного хеширования паролей в вашем приложении.
+        return new BCryptPasswordEncoder();
+    }
 }

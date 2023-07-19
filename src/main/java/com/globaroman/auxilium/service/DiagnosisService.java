@@ -3,19 +3,16 @@ package com.globaroman.auxilium.service;
 import com.globaroman.auxilium.model.entity.cabinet.Diagnosis;
 import com.globaroman.auxilium.model.repository.DiagnosisRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DiagnosisService {
     private final DiagnosisRepository diagnosisRepository;
-
-    @Autowired
-    public DiagnosisService(DiagnosisRepository diagnosisRepository) {
-        this.diagnosisRepository = diagnosisRepository;
-    }
 
     public List<Diagnosis> getAllHistoryDiagnisis(String userId) {
         return diagnosisRepository.findAllDiagnosisByUserId(userId);

@@ -8,6 +8,7 @@ import com.globaroman.auxilium.service.UserService;
 import com.globaroman.auxilium.view.TextConstants;
 import com.globaroman.auxilium.view.ViewAUX;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,17 +26,11 @@ import static com.globaroman.auxilium.view.TextConstants.MESSAGE_WRONG_INPUT_DAT
 
 //@RestController
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/")
 public class EnrollController {
     private final UserService userService;
     private final PasswordEncoderConfig passwordEncoderConfig;
-
-    @Autowired
-    public EnrollController(UserService userService, PasswordEncoderConfig passwordEncoderConfig) {
-        this.userService = userService;
-
-        this.passwordEncoderConfig = passwordEncoderConfig;
-    }
 
     @GetMapping("/main")
     public String getMainPage(Authentication authentication) {

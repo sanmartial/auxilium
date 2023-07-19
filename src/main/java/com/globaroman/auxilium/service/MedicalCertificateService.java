@@ -3,20 +3,16 @@ package com.globaroman.auxilium.service;
 import com.globaroman.auxilium.model.entity.cabinet.MedicalCertificate;
 import com.globaroman.auxilium.model.repository.MedicalCertificateRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MedicalCertificateService {
     private final MedicalCertificateRepository certificateRepository;
-
-    @Autowired
-    public MedicalCertificateService(MedicalCertificateRepository certificateRepository) {
-        this.certificateRepository = certificateRepository;
-    }
-
     public MedicalCertificate getCertificateById(Long id) {
         return certificateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Certificate not found"));
     }

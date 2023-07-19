@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnosis List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .analyzes-list {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .analyzes-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .analyzes-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .add-analyzes-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 3px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .add-analyzes-button:hover {
+            background-color: #45a049;
+        }
+
+        .cabinet-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #3f51b5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .cabinet-button:hover {
+            background-color: #303f9f;
+        }
+    </style>
+</head>
+<body>
+<h1>Analyzes List</h1>
+<div class="analyzes-item">
+    <h2>List of Analyzes:</h2>
+    <ul>
+        <!-- Example using dynamic data from backend (replace with actual data) -->
+        <li class="analyzes-item" th:each="analyze : ${Analyzeslists}" th:onclick="|viewAnalyzes(${analyze.id})|" th:text="${analyze.type_analyzes} + ' ' + ${analyze.description_analyzes} + ' ' + ${analyze.result_analyze} + ' ' + ${analyze.date_analyze}"></li>
+
+    </ul>
+</div>
+
+
+<a href="/cabinet" class="cabinet-button">Кабинет</a>
+
+<script>
+    function viewAnalyzes(analyzesId) {
+         window.location.href = '/cabinet/analyzes/' + analyzesId;
+    }
+</script>
+
+</body>
+</html>
+
+
