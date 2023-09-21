@@ -17,7 +17,7 @@ public class AnalyzesService {
         return analyzesRepository.save(analyzes);
     }
 
-    public List<Analyzes> getAllAnalyseById(Long id) {
+    public List<Analyzes> getAllAnalyseByDiagnosisId(Long id) {
         return analyzesRepository.findAllByDiagnosisId(id);
     }
 

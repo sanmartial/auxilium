@@ -4,13 +4,11 @@ import com.globaroman.auxilium.model.entity.cabinet.Analyzes;
 import com.globaroman.auxilium.model.entity.cabinet.Diagnosis;
 import com.globaroman.auxilium.model.entity.UserAUX;
 import com.globaroman.auxilium.model.entity.cabinet.MedicalCertificate;
-import com.globaroman.auxilium.model.repository.DiagnosisRepository;
 import com.globaroman.auxilium.service.AnalyzesService;
 import com.globaroman.auxilium.service.DiagnosisService;
 import com.globaroman.auxilium.service.MedicalCertificateService;
 import com.globaroman.auxilium.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,6 +25,11 @@ public class CabinetController {
     private final DiagnosisService diagnosisService;
     private final AnalyzesService analyzesService;
     private final MedicalCertificateService certificateService;
+
+    @GetMapping("/successful")
+    public String getFormSuccessfull() {
+        return "form_sussesfull";
+    }
     @GetMapping()
     public String getPageCabinet(Model model, Authentication authentication) {
 
@@ -74,7 +77,7 @@ public class CabinetController {
     @GetMapping("/diagnosis/{id}")
     public String getPageDiagnosis(@PathVariable("id") Long id, Model model) {
         Diagnosis diagnosis = diagnosisService.getDiagnosisById(id);
-        List<Analyzes> analyzesList = analyzesService.getAllAnalyseById(diagnosis.getId());
+        List<Analyzes> analyzesList = analyzesService.getAllAnalyseByDiagnosisId(diagnosis.getId());
         List<MedicalCertificate> certificateList = certificateService.getAllCertificateByDIagnosisId(id);
         model.addAttribute("diagnosis", diagnosis);
         model.addAttribute("analyzesList", analyzesList);
